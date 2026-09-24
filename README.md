@@ -1,6 +1,12 @@
 # Universal ImageGen Agent
 
-这是一个从 OpenAI Codex `imagegen` skill 改造而来的、面向通用智能体的独立项目。它不依赖某个宿主专有的内置图片工具，而是提供：
+这是一个从 OpenAI Codex `imagegen` skill 改造而来的、面向通用智能体的独立项目。它把 Codex 生图能力中已经沉淀下来的任务决策流程、提示词工程、用例分类、编辑不变量和提示词范例库抽离出来，使任意具备 shell 或 Python 调用能力的智能体，都能直接复用这套成熟方法来生成和编辑图片，而不必依赖 Codex 专有的内置图片工具。
+
+随着 Qwen-Image、Qwen-Image-2.1 等开放图像模型快速发展，智能体已经拥有越来越多可选择的生图后端。本项目不绑定某个模型：既可以连接 OpenAI Images API，也可以连接实现兼容接口的第三方服务；将 Qwen-Image 部署到本地或推理服务后，还可以通过 OpenAI-compatible 网关或新增适配器，把 Qwen 的开放模型能力与本项目继承自 Codex 的提示词库、工作流和质量约束组合起来，让不同智能体获得更稳定、更专业的生图体验。
+
+> 当前内置的是 OpenAI-compatible Images API 适配层。Qwen 本地 Diffusers、ComfyUI 或 SGLang 推理后端尚未直接内置，需要通过兼容网关接入或新增 provider adapter。
+
+项目提供：
 
 - 可由任意具备 shell 能力的智能体调用的 `imagegen-agent` CLI；
 - 可嵌入其他程序的 Python 接口；
@@ -13,6 +19,19 @@
 当前改造日期为 2026-09-24。新配置默认使用
 `gpt-image-2.5-sunburst`，但模型不是硬编码限制，任何部署都可以通过
 环境变量、TOML 或命令行替换。
+
+## 为什么适合 Qwen-Image 等开放模型
+
+图像模型本身决定画面生成能力，而智能体侧的任务理解、提示词组织、输入图片角色标注、编辑不变量和结果检查同样决定最终质量。这个项目负责后半部分：
+
+- 把用户的自然语言请求转换为结构清晰、面向生产的图片提示词；
+- 区分新图生成、参考图生成、局部编辑、多图合成和批量资源等任务；
+- 为编辑任务持续锁定人物身份、布局、文字、边缘和背景等不变量；
+- 复用 Codex `imagegen` skill 中的 use-case taxonomy 和提示词范例；
+- 用统一 CLI、Python API 和 JSON 结果，让不同智能体共享同一套生图能力；
+- 通过可配置 provider，将相同工作流用于 OpenAI 模型、Qwen-Image 部署或其他兼容服务。
+
+因此，接入 Qwen-Image 并不意味着每个智能体都要重新设计提示词系统。只要部署端提供兼容 API，智能体就可以继续使用本项目的 `SKILL.md`、提示词库和执行协议；如果部署端接口不同，也只需新增 provider adapter，而不需要重写上层智能体工作流。
 
 ## 目录
 

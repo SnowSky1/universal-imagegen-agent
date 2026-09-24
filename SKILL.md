@@ -1,6 +1,6 @@
 ---
 name: "universal-imagegen"
-description: "Generate or edit raster images through a configurable Images API. Use for photos, illustrations, product images, bitmap mockups, textures, sprites, compositing, inpainting, or transparent-background assets. Runtime-neutral: invoke the bundled imagegen-agent CLI or Python API from any agent with shell access."
+description: "Bring the Codex imagegen workflow, prompt engineering, use-case taxonomy, edit invariants, and prompt library to any general-purpose agent, then generate or edit raster images through a configurable Images API. Supports OpenAI-compatible services and Qwen-Image deployments exposed through compatible gateways."
 ---
 
 # Universal Image Generation Skill
@@ -13,12 +13,18 @@ description: "Generate or edit raster images through a configurable Images API. 
 This skill does not assume a host-specific built-in image tool.
 
 - Preferred execution: `imagegen-agent` CLI from this project.
+- Reuse the bundled Codex-derived prompt library and workflow regardless of
+  which compatible image model serves the request.
 - Machine-readable execution: always add `--json`.
 - Safe validation: run with `--dry-run` before a costly or destructive retry.
 - Credentials: read from environment variables only. Never ask a user to paste
   a complete API key into chat and never pass a key on the command line.
 - API portability: model, base URL, headers, and API-key environment variable
   are configurable. Do not assume one provider's model catalog.
+- Open models: Qwen-Image and similar deployments can be used when exposed
+  through the bundled OpenAI-compatible interface. For native Diffusers,
+  ComfyUI, SGLang, or another protocol, add a provider adapter rather than
+  changing the agent-facing workflow.
 - Output safety: do not overwrite existing files unless the user explicitly
   authorizes replacement and `--force` is supplied.
 
