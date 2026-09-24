@@ -1,0 +1,18 @@
+# Copy to .imagegen.toml for project-local settings.
+# Keep credentials out of this file. Point api_key_env at an environment
+# variable instead.
+
+[provider]
+name = "openai-compatible"
+base_url = "https://api.openai.com/v1"
+api_key_env = "IMAGEGEN_API_KEY"
+model = "gpt-image-2.5-sunburst"
+timeout_seconds = 180.0
+max_retries = 2
+
+[defaults]
+size = "auto"
+quality = "auto"
+output_format = "png"
+output_dir = "output/imagegen"
+concurrency = 4

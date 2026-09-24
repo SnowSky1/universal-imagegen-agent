@@ -1,0 +1,17 @@
+Universal ImageGen Agent
+Copyright 2026 SnowSky1
+
+This project is an independently adapted derivative of the OpenAI Codex
+"imagegen" skill. The unmodified source snapshot used for the adaptation is
+preserved under upstream/imagegen/.
+
+The adaptation was made on September 24, 2026. Major changes include:
+- replacing Codex-only built-in-tool assumptions with a runtime-neutral CLI;
+- adding provider, model, base URL, header, and credential configuration;
+- adding a reusable Python library interface and machine-readable output;
+- adding tests, packaging, security guidance, and agent integration docs;
+- updating the default model used by new configurations while keeping it
+  fully overridable.
+
+The upstream files and this derivative are distributed under the Apache
+License 2.0. See LICENSE and upstream/imagegen/LICENSE.txt.
