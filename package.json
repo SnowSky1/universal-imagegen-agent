@@ -27,7 +27,7 @@
   "scripts": {
     "test": "node --test node-tests/*.test.js",
     "check": "node --check bin/imagegen-agent.js && node --check node/cli.js && node --check node/client.js && node --check node/config.js && node --check node/install-skill.js && node --check node/prompting.js && node --check node/version.js",
-    "prepack": "npm run check && npm test"
+    "prepublishOnly": "npm run check && npm test"
   },
   "keywords": [
     "ai-agent",
