@@ -1,5 +1,9 @@
 # Universal ImageGen Agent
 
+[![GitHub stars](https://img.shields.io/github/stars/SnowSky1/universal-imagegen-agent?style=flat-square)](https://github.com/SnowSky1/universal-imagegen-agent/stargazers)
+[![CI](https://img.shields.io/github/actions/workflow/status/SnowSky1/universal-imagegen-agent/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/SnowSky1/universal-imagegen-agent/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/SnowSky1/universal-imagegen-agent?style=flat-square)](LICENSE)
+
 A runtime-neutral image generation and editing skill that brings the workflow,
 prompt engineering, use-case taxonomy, edit invariants, and prompt library of
 the OpenAI Codex `imagegen` skill to any general-purpose AI agent. Agents can
@@ -26,12 +30,31 @@ shell access and does not depend on a Codex-only built-in image tool.
 
 ## Quick start
 
-```powershell
-uv sync --extra dev
-Copy-Item .env.example .env
-# Set IMAGEGEN_API_KEY in .env
-uv run imagegen-agent config
-uv run imagegen-agent generate "A ceramic mug on a stone table" --dry-run --json
+```bash
+npm install --global universal-imagegen-agent
+imagegen-agent install-skill
+imagegen-agent config --json
+imagegen-agent generate "A ceramic mug on a stone table" --dry-run --json
+```
+
+With pnpm:
+
+```bash
+pnpm add --global universal-imagegen-agent
+imagegen-agent install-skill
+```
+
+Without a global install:
+
+```bash
+npx universal-imagegen-agent install-skill
+pnpm dlx universal-imagegen-agent generate "A ceramic mug" --dry-run --json
+```
+
+Install the latest GitHub version before an npm release:
+
+```bash
+npm install --global github:SnowSky1/universal-imagegen-agent
 ```
 
 For full documentation, see [README.md](README.md).

@@ -3,6 +3,23 @@
 This project is deliberately host-neutral. Any agent that can execute a command
 and parse JSON can use it.
 
+## Install through npm or pnpm
+
+```bash
+npm install --global universal-imagegen-agent
+# or
+pnpm add --global universal-imagegen-agent
+```
+
+Install the accompanying skill:
+
+```bash
+imagegen-agent install-skill
+```
+
+For an ephemeral invocation, use `npx universal-imagegen-agent` or
+`pnpm dlx universal-imagegen-agent`.
+
 ## Stable command contract
 
 Use:

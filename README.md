@@ -1,5 +1,9 @@
 # Universal ImageGen Agent
 
+[![GitHub stars](https://img.shields.io/github/stars/SnowSky1/universal-imagegen-agent?style=flat-square)](https://github.com/SnowSky1/universal-imagegen-agent/stargazers)
+[![CI](https://img.shields.io/github/actions/workflow/status/SnowSky1/universal-imagegen-agent/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/SnowSky1/universal-imagegen-agent/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/SnowSky1/universal-imagegen-agent?style=flat-square)](LICENSE)
+
 这是一个从 OpenAI Codex `imagegen` skill 改造而来的、面向通用智能体的独立项目。它把 Codex 生图能力中已经沉淀下来的任务决策流程、提示词工程、用例分类、编辑不变量和提示词范例库抽离出来，使任意具备 shell 或 Python 调用能力的智能体，都能直接复用这套成熟方法来生成和编辑图片，而不必依赖 Codex 专有的内置图片工具。
 
 随着 Qwen-Image、Qwen-Image-2.1 等开放图像模型快速发展，智能体已经拥有越来越多可选择的生图后端。本项目不绑定某个模型：既可以连接 OpenAI Images API，也可以连接实现兼容接口的第三方服务；将 Qwen-Image 部署到本地或推理服务后，还可以通过 OpenAI-compatible 网关或新增适配器，把 Qwen 的开放模型能力与本项目继承自 Codex 的提示词库、工作流和质量约束组合起来，让不同智能体获得更稳定、更专业的生图体验。
@@ -9,7 +13,9 @@
 项目提供：
 
 - 可由任意具备 shell 能力的智能体调用的 `imagegen-agent` CLI；
-- 可嵌入其他程序的 Python 接口；
+- 可通过 npm、pnpm 或 Python 安装；
+- 可嵌入其他程序的 Node.js 与 Python 接口；
+- 一条命令安装到 Codex 或兼容智能体的 `universal-imagegen` skill；
 - `--json` 机器可读输出和稳定的退出码；
 - 独立 API 密钥、自定义 `base_url`、模型、请求头和扩展请求参数；
 - 生成、编辑、多图输入、遮罩和 JSONL 批处理；
@@ -38,6 +44,10 @@
 ```text
 .
 ├── SKILL.md                    # 适用于通用智能体的技能说明
+├── agents/openai.yaml          # Skill 的 UI 与自动发现元数据
+├── bin/                        # npm/pnpm 安装后的 CLI 入口
+├── node/                       # Node.js CLI、API 与 skill 安装器
+├── node-tests/                 # Node.js 测试
 ├── src/universal_imagegen/     # CLI、配置、提示词与 API 适配层
 ├── tests/                      # 不调用真实 API 的单元测试
 ├── references/                 # 通用提示词与集成说明
@@ -48,18 +58,80 @@
 
 ## 安装
 
-需要 Python 3.11 或更高版本，推荐使用 uv：
+### npm
+
+```bash
+npm install --global universal-imagegen-agent
+```
+
+### pnpm
+
+```bash
+pnpm add --global universal-imagegen-agent
+```
+
+安装后可直接运行：
+
+```bash
+imagegen-agent --version
+imagegen-agent config --json
+```
+
+也可以不进行全局安装：
+
+```bash
+npx universal-imagegen-agent generate "A ceramic mug" --dry-run --json
+pnpm dlx universal-imagegen-agent generate "A ceramic mug" --dry-run --json
+```
+
+如果 npm registry 版本尚未发布或需要测试最新的 `main`：
+
+```bash
+npm install --global github:SnowSky1/universal-imagegen-agent
+pnpm add --global github:SnowSky1/universal-imagegen-agent
+```
+
+### 安装相应 skill
+
+全局安装 CLI 后：
+
+```bash
+imagegen-agent install-skill
+```
+
+不全局安装：
+
+```bash
+npx universal-imagegen-agent install-skill
+pnpm dlx universal-imagegen-agent install-skill
+```
+
+默认安装位置为：
+
+```text
+$CODEX_HOME/skills/universal-imagegen
+```
+
+未设置 `CODEX_HOME` 时使用：
+
+```text
+~/.codex/skills/universal-imagegen
+```
+
+可通过 `--target` 安装到其他智能体的技能目录：
+
+```bash
+imagegen-agent install-skill --target /path/to/agent/skills
+```
+
+已有同名 skill 时默认不覆盖；确认替换时添加 `--force`。安装完成后重启或重新加载智能体，使其发现 `$universal-imagegen`。
+
+### Python 开发版
+
+需要 Python 3.11 或更高版本：
 
 ```powershell
 uv sync --extra dev
-```
-
-也可以使用标准 pip：
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev]"
 ```
 
 ## 配置 API
@@ -98,7 +170,7 @@ TOML 中只写 `api_key_env`，密钥本身放在环境变量。
 
 ### 自定义兼容服务
 
-只要服务实现与 OpenAI Python SDK 兼容的 Images API，即可配置：
+只要服务实现兼容的 Images API，即可配置：
 
 ```dotenv
 IMAGEGEN_API_KEY=provider-secret
@@ -114,14 +186,14 @@ IMAGEGEN_HEADERS_JSON={"X-Project":"demo"}
 检查配置，输出会自动隐藏密钥：
 
 ```powershell
-uv run imagegen-agent config
-uv run imagegen-agent config --json
+imagegen-agent config
+imagegen-agent config --json
 ```
 
 仅验证请求，不联网：
 
 ```powershell
-uv run imagegen-agent generate "一只放在石桌上的陶瓷杯" `
+imagegen-agent generate "一只放在石桌上的陶瓷杯" `
   --use-case product-mockup `
   --style "clean product photography" `
   --constraints "no logo; no watermark" `
@@ -131,7 +203,7 @@ uv run imagegen-agent generate "一只放在石桌上的陶瓷杯" `
 生成：
 
 ```powershell
-uv run imagegen-agent generate "A quiet alpine cabin at dawn" `
+imagegen-agent generate "A quiet alpine cabin at dawn" `
   --size 1536x1024 `
   --quality high `
   --out output/imagegen/alpine-cabin.png
@@ -140,7 +212,7 @@ uv run imagegen-agent generate "A quiet alpine cabin at dawn" `
 编辑：
 
 ```powershell
-uv run imagegen-agent edit `
+imagegen-agent edit `
   --image input.png `
   --prompt "Change only the background to a warm sunset" `
   --constraints "keep the subject, framing, and edges unchanged" `
@@ -155,7 +227,7 @@ uv run imagegen-agent edit `
 ```
 
 ```powershell
-uv run imagegen-agent batch jobs.jsonl `
+imagegen-agent batch jobs.jsonl `
   --out-dir output/imagegen/batch `
   --concurrency 4 --json
 ```
@@ -168,6 +240,23 @@ uv run imagegen-agent batch jobs.jsonl `
 `1`。
 
 完整的行为约束、决策树和提示词分类见 [SKILL.md](SKILL.md)。
+
+## Node.js 接口
+
+```javascript
+import {
+  ImageGenClient,
+  loadSettings,
+} from "universal-imagegen-agent";
+
+const settings = await loadSettings();
+const client = new ImageGenClient(settings);
+const result = await client.generate({
+  prompt: "A minimal ceramic mug product photo",
+  out: "output/imagegen/mug.png",
+});
+console.log(result.outputs);
+```
 
 ## Python 接口
 
@@ -190,3 +279,5 @@ print(result.outputs)
 项目使用 Apache License 2.0。原始 skill 未经修改保存在
 `upstream/imagegen/`，改造说明见 `NOTICE`。根目录代码与文档是为通用
 智能体重新组织的派生实现。
+
+如果这个项目帮助你把 Codex 的提示词能力带到了更多智能体或开放模型中，欢迎给仓库点一个 Star，并分享你接入的模型或 provider adapter。

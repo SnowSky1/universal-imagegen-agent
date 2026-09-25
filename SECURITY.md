@@ -28,5 +28,12 @@ them to other tools.
 
 ## Reporting
 
-For this private repository, report security concerns directly to the
-repository owner rather than opening a public issue.
+Report security concerns privately to the repository owner rather than opening
+a public issue that could expose users before a fix is available.
+
+## npm publishing
+
+Prefer npm Trusted Publishing through the repository's
+`publish-npm.yml` workflow. If an `NPM_TOKEN` is used for the initial publish,
+store it only as a GitHub Actions secret or in the local npm credential store.
+Never commit `.npmrc` files containing authentication tokens.

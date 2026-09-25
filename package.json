@@ -1,0 +1,61 @@
+{
+  "name": "universal-imagegen-agent",
+  "version": "0.1.0",
+  "description": "Bring Codex imagegen workflows and its prompt library to any agent, with configurable APIs and compatible Qwen-Image deployments.",
+  "type": "module",
+  "bin": {
+    "imagegen-agent": "./bin/imagegen-agent.js",
+    "universal-imagegen-agent": "./bin/imagegen-agent.js"
+  },
+  "exports": {
+    ".": "./node/index.js"
+  },
+  "files": [
+    "bin",
+    "node",
+    "agents",
+    "references",
+    "SKILL.md",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "NOTICE",
+    "SECURITY.md",
+    ".env.example",
+    "imagegen.example.toml"
+  ],
+  "scripts": {
+    "test": "node --test node-tests/*.test.js",
+    "check": "node --check bin/imagegen-agent.js && node --check node/cli.js && node --check node/client.js && node --check node/config.js && node --check node/install-skill.js && node --check node/prompting.js && node --check node/version.js",
+    "prepack": "npm run check && npm test"
+  },
+  "keywords": [
+    "ai-agent",
+    "codex",
+    "image-generation",
+    "openai-compatible",
+    "qwen-image",
+    "prompt-engineering",
+    "skill",
+    "cli"
+  ],
+  "author": "SnowSky1",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnowSky1/universal-imagegen-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SnowSky1/universal-imagegen-agent/issues"
+  },
+  "homepage": "https://github.com/SnowSky1/universal-imagegen-agent#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "smol-toml": "^1.9.0"
+  }
+}

@@ -12,7 +12,10 @@ description: "Bring the Codex imagegen workflow, prompt engineering, use-case ta
 
 This skill does not assume a host-specific built-in image tool.
 
-- Preferred execution: `imagegen-agent` CLI from this project.
+- Preferred execution: the npm/pnpm-installed `imagegen-agent` CLI.
+- If the global command is unavailable and package execution is allowed, use
+  `npx -y universal-imagegen-agent` or
+  `pnpm dlx universal-imagegen-agent` as the command prefix.
 - Reuse the bundled Codex-derived prompt library and workflow regardless of
   which compatible image model serves the request.
 - Machine-readable execution: always add `--json`.
@@ -27,6 +30,26 @@ This skill does not assume a host-specific built-in image tool.
   changing the agent-facing workflow.
 - Output safety: do not overwrite existing files unless the user explicitly
   authorizes replacement and `--force` is supplied.
+
+## Installation
+
+Install the CLI and this skill together:
+
+```bash
+npm install --global universal-imagegen-agent
+imagegen-agent install-skill
+```
+
+Or install only the skill without keeping a global package:
+
+```bash
+npx universal-imagegen-agent install-skill
+```
+
+Restart or reload the host agent after installation. The installer defaults to
+`$CODEX_HOME/skills/universal-imagegen`, or
+`~/.codex/skills/universal-imagegen` when `CODEX_HOME` is unset. Use
+`--target` for another compatible agent's skill directory.
 
 ## Intent decision
 

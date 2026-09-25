@@ -1,0 +1,8 @@
+interface:
+  display_name: "Universal ImageGen"
+  short_description: "Codex-derived image prompting for any agent"
+  brand_color: "#38BDF8"
+  default_prompt: "Use $universal-imagegen to create a polished image with the configured provider."
+
+policy:
+  allow_implicit_invocation: true

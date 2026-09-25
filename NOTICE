@@ -9,6 +9,10 @@ The adaptation was made on September 24, 2026. Major changes include:
 - replacing Codex-only built-in-tool assumptions with a runtime-neutral CLI;
 - adding provider, model, base URL, header, and credential configuration;
 - adding a reusable Python library interface and machine-readable output;
+- adding a zero-Python Node.js CLI and JavaScript library distributed through
+  npm and pnpm;
+- adding a validated, one-command installer for the accompanying
+  `universal-imagegen` agent skill;
 - adding tests, packaging, security guidance, and agent integration docs;
 - updating the default model used by new configurations while keeping it
   fully overridable.
