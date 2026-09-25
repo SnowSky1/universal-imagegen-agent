@@ -1,6 +1,8 @@
 # Universal ImageGen Agent
 
 [![GitHub stars](https://img.shields.io/github/stars/SnowSky1/universal-imagegen-agent?style=flat-square)](https://github.com/SnowSky1/universal-imagegen-agent/stargazers)
+[![npm version](https://img.shields.io/npm/v/universal-imagegen-agent?style=flat-square)](https://www.npmjs.com/package/universal-imagegen-agent)
+[![npm downloads](https://img.shields.io/npm/dm/universal-imagegen-agent?style=flat-square)](https://www.npmjs.com/package/universal-imagegen-agent)
 [![CI](https://img.shields.io/github/actions/workflow/status/SnowSky1/universal-imagegen-agent/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/SnowSky1/universal-imagegen-agent/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/SnowSky1/universal-imagegen-agent?style=flat-square)](LICENSE)
 

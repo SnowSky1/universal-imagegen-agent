@@ -31,7 +31,21 @@ jobs:
           npm test
           npm pack --dry-run
 
+      - name: Check whether version is already published
+        id: registry
+        shell: bash
+        run: |
+          PACKAGE_NAME="$(node -p "require('./package.json').name")"
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is already published; skipping."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Configure token fallback
+        if: steps.registry.outputs.published != 'true'
         shell: bash
         run: |
           if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
@@ -41,4 +55,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish
+        if: steps.registry.outputs.published != 'true'
         run: npm publish --access public
