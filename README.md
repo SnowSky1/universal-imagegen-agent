@@ -70,15 +70,15 @@ Node.js/Python CLI 加入共享的数量边界用例。未指定数量时仍默�
 
 ### 安装本次修复版 v0.1.2
 
-GitHub Release 已包含可直接安装的 npm 包、Python wheel 和源码包：
+`v0.1.2` 已发布到 npm，可固定版本安装：
 
 ```bash
-npm install --global https://github.com/SnowSky1/universal-imagegen-agent/releases/download/v0.1.2/universal-imagegen-agent-0.1.2.tgz
+npm install --global universal-imagegen-agent@0.1.2
 imagegen-agent --version
 ```
 
-截至 2026-10-11，npm registry 的 `latest` 仍为 `0.1.0`；需要本次数量校验
-修复时，请使用上面的固定版本安装命令。版本和全部产物见
+本版本修复了数量校验和 npm CLI 入口，并通过 GitHub Actions 可信发布。
+需要直接下载安装包、Python wheel 或源码包时，可查看
 [v0.1.2 Release](https://github.com/SnowSky1/universal-imagegen-agent/releases/tag/v0.1.2)。
 
 ### npm

@@ -51,7 +51,7 @@ Install the CLI, then set `IMAGEGEN_API_KEY`, `IMAGEGEN_BASE_URL`, and
 one service may not exist at another service.
 
 ```bash
-npm install --global https://github.com/SnowSky1/universal-imagegen-agent/releases/download/v0.1.2/universal-imagegen-agent-0.1.2.tgz
+npm install --global universal-imagegen-agent@0.1.2
 imagegen-agent config --json
 ```
 

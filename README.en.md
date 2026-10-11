@@ -8,11 +8,12 @@ Version 0.1.1 rejects `n=0` consistently in the Node.js and Python CLIs. The
 default remains one image. The walkthrough includes a runnable local API
 fixture and separate instructions for a real provider.
 
-**Install the fixed version:** GitHub Release v0.1.2 includes a directly
-installable package. As of 2026-10-11, npm registry `latest` is still 0.1.0.
+**Install the fixed version:** v0.1.2 is published on npm through GitHub Actions
+trusted publishing. The GitHub Release also includes an npm archive, Python
+wheel, and source distribution.
 
 ```bash
-npm install --global https://github.com/SnowSky1/universal-imagegen-agent/releases/download/v0.1.2/universal-imagegen-agent-0.1.2.tgz
+npm install --global universal-imagegen-agent@0.1.2
 ```
 
 [![GitHub stars](https://img.shields.io/github/stars/SnowSky1/universal-imagegen-agent?style=flat-square)](https://github.com/SnowSky1/universal-imagegen-agent/stargazers)
