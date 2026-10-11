@@ -1,5 +1,13 @@
 # Universal ImageGen Agent
 
+[Generate → edit walkthrough](examples/README.md) ·
+[Changelog](CHANGELOG.md) ·
+[Author's personal showcase](http://122.51.52.78/)
+
+Version 0.1.1 rejects `n=0` consistently in the Node.js and Python CLIs. The
+default remains one image. The walkthrough includes a runnable local API
+fixture and separate instructions for a real provider.
+
 [![GitHub stars](https://img.shields.io/github/stars/SnowSky1/universal-imagegen-agent?style=flat-square)](https://github.com/SnowSky1/universal-imagegen-agent/stargazers)
 [![npm version](https://img.shields.io/npm/v/universal-imagegen-agent?style=flat-square)](https://www.npmjs.com/package/universal-imagegen-agent)
 [![npm downloads](https://img.shields.io/npm/dm/universal-imagegen-agent?style=flat-square)](https://www.npmjs.com/package/universal-imagegen-agent)

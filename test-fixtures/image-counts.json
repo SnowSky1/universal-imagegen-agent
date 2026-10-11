@@ -1,0 +1,8 @@
+[
+  { "name": "omitted", "exitCode": 0, "expectedCount": 1 },
+  { "name": "zero", "n": 0, "exitCode": 2 },
+  { "name": "negative", "n": -1, "exitCode": 2 },
+  { "name": "above limit", "n": 11, "exitCode": 2 },
+  { "name": "one", "n": 1, "exitCode": 0, "expectedCount": 1 },
+  { "name": "upper limit", "n": 10, "exitCode": 0, "expectedCount": 10 }
+]

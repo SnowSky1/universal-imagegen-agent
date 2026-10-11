@@ -62,5 +62,8 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Verify generate and edit walkthrough
+        run: node examples/verify-workflow.mjs
+
       - name: Verify package contents
         run: npm pack --dry-run

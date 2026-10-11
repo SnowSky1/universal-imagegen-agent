@@ -277,7 +277,7 @@ export class ImageGenClient {
     const outputFormat = normalizeFormat(
       request.outputFormat || this.settings.outputFormat,
     );
-    const n = Number(request.n || 1);
+    const n = Number(request.n ?? 1);
     validateCommon({
       n,
       background: request.background,
@@ -363,7 +363,7 @@ export class ImageGenClient {
     const outputFormat = normalizeFormat(
       request.outputFormat || this.settings.outputFormat,
     );
-    const n = Number(request.n || 1);
+    const n = Number(request.n ?? 1);
     validateCommon({
       n,
       background: request.background,

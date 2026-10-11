@@ -1,6 +1,6 @@
 {
   "name": "universal-imagegen-agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bring Codex imagegen workflows and its prompt library to any agent, with configurable APIs and compatible Qwen-Image deployments.",
   "type": "module",
   "bin": {
@@ -15,7 +15,9 @@
     "node",
     "agents",
     "references",
+    "examples",
     "SKILL.md",
+    "CHANGELOG.md",
     "README.md",
     "README.en.md",
     "LICENSE",

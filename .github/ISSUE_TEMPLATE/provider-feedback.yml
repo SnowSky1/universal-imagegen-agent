@@ -1,0 +1,46 @@
+name: Provider compatibility feedback
+description: Share a reproducible successful run or a provider compatibility issue.
+title: "[Provider] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please omit API keys, authorization headers, private endpoint URLs, and personal paths.
+        Reports of successful generation/editing are welcome.
+  - type: input
+    id: version
+    attributes:
+      label: Package version and runtime
+      placeholder: universal-imagegen-agent 0.1.1; Node 24; Windows 11
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider and model
+      description: Public provider/model names only; omit private service URLs.
+    validations:
+      required: true
+  - type: dropdown
+    id: operation
+    attributes:
+      label: Operation
+      options:
+        - Generate
+        - Edit
+        - Batch
+        - Install or configuration
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Sanitized command and result
+      description: Include expected behavior, actual behavior, and exit code. Mention if this was a dry-run.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Optional output or before/after images
+      description: Only include material you are comfortable making public.

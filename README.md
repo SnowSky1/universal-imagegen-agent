@@ -6,6 +6,14 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/SnowSky1/universal-imagegen-agent/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/SnowSky1/universal-imagegen-agent/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/SnowSky1/universal-imagegen-agent?style=flat-square)](LICENSE)
 
+**开始验证：** [完整 generate → edit 案例](examples/README.md) ·
+[更新记录](CHANGELOG.md) ·
+[English](README.en.md) ·
+[作者展示页：Agent 与 AI](http://122.51.52.78/)
+
+`v0.1.1` 修复了 Node.js 将 `n=0` 静默变成 `n=1` 的行为，并为
+Node.js/Python CLI 加入共享的数量边界用例。未指定数量时仍默认生成一张。
+
 这是一个从 OpenAI Codex `imagegen` skill 改造而来的、面向通用智能体的独立项目。它把 Codex 生图能力中已经沉淀下来的任务决策流程、提示词工程、用例分类、编辑不变量和提示词范例库抽离出来，使任意具备 shell 或 Python 调用能力的智能体，都能直接复用这套成熟方法来生成和编辑图片，而不必依赖 Codex 专有的内置图片工具。
 
 随着 Qwen-Image、Qwen-Image-2.1 等开放图像模型快速发展，智能体已经拥有越来越多可选择的生图后端。本项目不绑定某个模型：既可以连接 OpenAI Images API，也可以连接实现兼容接口的第三方服务；将 Qwen-Image 部署到本地或推理服务后，还可以通过 OpenAI-compatible 网关或新增适配器，把 Qwen 的开放模型能力与本项目继承自 Codex 的提示词库、工作流和质量约束组合起来，让不同智能体获得更稳定、更专业的生图体验。
@@ -275,6 +283,17 @@ result = client.generate(
 )
 print(result.outputs)
 ```
+
+## 验证和使用反馈
+
+从源码目录运行 `node examples/verify-workflow.mjs`，可以实际走通本地
+HTTP 请求、PNG 文件保存和 multipart 编辑上传，并得到 `verification.json`。
+该案例返回明确标注的单像素测试图片，用于验证集成链路；真实模型的运行说明和
+验证边界见 [案例文档](examples/README.md)。
+
+如已接入自己的服务，欢迎通过 GitHub Issues 中的
+**Provider compatibility feedback** 表单提供成功记录或错误复现。
+请包含版本、运行环境、provider/model 名称和脱敏命令，不要提交密钥。
 
 ## 许可证和来源
 
