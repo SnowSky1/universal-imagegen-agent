@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 — 2026-10-11
+
+- Normalize both npm `bin` paths so npm publish does not remove the CLI entries.
+- Retain the image-count validation fix, shared regression fixtures, and
+  reproducible walkthrough introduced in 0.1.1.
+
 ## 0.1.1 — 2026-10-11
 
 - Reject an explicit image count of zero in the Node.js generate and edit
